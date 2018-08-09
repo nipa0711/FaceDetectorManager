@@ -142,27 +142,25 @@ namespace FaceDetectorManager
                 {
                     case 1:
                         FaceDetector detector = new FaceDetector();
-                        String protoTxt = (Config.desktop + "\\deploy.prototxt");
-                        String caffeModel = (Config.desktop + "\\res10_300x300_ssd_iter_140000.caffemodel");
+                        
                         Process process = new Process();
-                        process.StartInfo.FileName = "faceOnly.exe";
+                        process.StartInfo.FileName = Config.faceOnly;
                         process.StartInfo.CreateNoWindow = true;
                         process.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
 
                         int memberCount = Config.bPMember.Length;
                         for (int i = 0; i < memberCount; i++)
                         {
+                            Console.WriteLine(i);
                             String folderPath = System.String.Format("{0}\\{1}\\original", Config.BP, Config.bPMember[i]);
                             String trainPath = System.String.Format("{0}\\{1}\\train", Config.BP, Config.bPMember[i]);
                             List<String> imagesPath = GetFolderFiles(folderPath);
                             Console.WriteLine(Config.bPMember[i] + " Start!");
-
-                            int imageCount = imagesPath.Count;
-
+                            
                             foreach (var filePath in imagesPath)
                             {
                                 String fileName = Path.GetFileName(filePath);
-                                string argument = System.String.Format(" {0} {1} {2} {3} {4} {5}", protoTxt, caffeModel, filePath, trainPath, fileName, "image");
+                                string argument = System.String.Format(" {0} {1} {2} {3} {4} {5}", Config.protoTxt, Config.caffeModel, filePath, trainPath, fileName, "image");
                                 process.StartInfo.Arguments = argument; // Put your arguments here
                                 process.StartInfo.CreateNoWindow = true;
                                 process.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
@@ -205,6 +203,9 @@ namespace FaceDetectorManager
                         break;
                     case 7:
                         temp();
+                        break;
+                    case 8:
+                        Console.WriteLine(File.Exists(Config.protoTxt));
                         break;
                     case 0:
                         flag = false;
