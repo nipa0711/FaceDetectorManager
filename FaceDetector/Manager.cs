@@ -158,26 +158,17 @@ namespace FaceDetectorManager
                             Console.WriteLine(Config.bPMember[i] + " Start!");
 
                             int imageCount = imagesPath.Count;
-                            for (int j = 0; j < imageCount; j++)
+
+                            foreach (var filePath in imagesPath)
                             {
-                                String filePath = imagesPath[j];
                                 String fileName = Path.GetFileName(filePath);
-                                string argument = System.String.Format(" {0} {1} {2} {3} {4}", protoTxt, caffeModel, filePath, trainPath, fileName);
+                                string argument = System.String.Format(" {0} {1} {2} {3} {4} {5}", protoTxt, caffeModel, filePath, trainPath, fileName, "image");
                                 process.StartInfo.Arguments = argument; // Put your arguments here
+                                process.StartInfo.CreateNoWindow = true;
+                                process.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
                                 Console.WriteLine("Processing : " + filePath);
                                 process.Start();
                             }
-
-                            //foreach (var filePath in imagesPath)
-                            //{
-                            //    String fileName = Path.GetFileName(filePath);
-                            //    string argument = System.String.Format(" {0} {1} {2} {3} {4}", protoTxt, caffeModel, filePath, trainPath, fileName);
-                            //    process.StartInfo.Arguments = argument; // Put your arguments here
-                            //    process.StartInfo.CreateNoWindow = true;
-                            //    process.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
-                            //    Console.WriteLine("Processing : " + filePath);
-                            //    process.Start();
-                            //}
                             Console.WriteLine(Config.bPMember[i]+" Done");
                         }
                         process.Close();

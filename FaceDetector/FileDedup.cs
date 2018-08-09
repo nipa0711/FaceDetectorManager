@@ -61,15 +61,5 @@ namespace FaceDetectorManager
                 Console.WriteLine("wrong directory");
             }
         }
-
-        //static void Main(string[] args)
-        //{
-        //    //RemoveDuplicate("E:\\download\\black_pink_lisa");
-        //    for (int i = 0; i < bPMember.Length; i++)
-        //    {
-        //        String folderPath = System.String.Format("C:\\BlackPink\\{0}\\original", bPMember[i]);
-        //        RemoveDuplicate(folderPath);
-        //    }
-        //}
     }
 }
